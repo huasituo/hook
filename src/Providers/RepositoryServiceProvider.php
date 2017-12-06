@@ -1,4 +1,5 @@
 <?php 
+
 namespace Huasituo\Hook\Providers;
 
 use Illuminate\Support\ServiceProvider;

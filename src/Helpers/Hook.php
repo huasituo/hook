@@ -1,6 +1,7 @@
 <?php
 
 use Huasituo\Hook\Hook;
+
 /**
  * hook
  *
@@ -8,7 +9,7 @@ use Huasituo\Hook\Hook;
 
 if ( ! function_exists('hst_hook'))
 {
-    function hst_hook($hook_name, $data = [], $result = false)
+    function hst_hook($hook_name, $data = null, $result = false)
     {
         if($result) {
             return Hooks::call_hook($hook_name, $data, $result);

@@ -23,7 +23,6 @@ class ConsoleServiceProvider extends ServiceProvider
             return new \Huasituo\Hook\Console\Commands\HookCacheCommand($app['hooks']);
         });
         $this->commands('command.hook.cache');
-
         $this->app->singleton('command.hook.list', function ($app) {
             return new \Huasituo\Hook\Console\Commands\HookListCommand($app['hooks']);
         });

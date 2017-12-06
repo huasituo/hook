@@ -77,8 +77,8 @@
 </div>
 </div>
 <script>
-  Hstui.use('jquery','common',function() {
-  });
+Hstui.use('jquery','common',function() {
+});
 </script>
 </body>
 </html>

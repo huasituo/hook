@@ -10,12 +10,8 @@ use Hooks;
 class TestController extends Controller
 {
 
-    public function __construct()
+    public function index() 
     {
-
-    }
-
-    public function index() {
         $data = Hooks::call_hook('s_test_arr', ['a'=>1], true);
         return view('hook::test', ['data'=>$data]);
     }

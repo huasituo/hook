@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace Huasituo\Hook\Contracts;
 
 interface Repository

@@ -27,7 +27,8 @@ class HelperServiceProvider extends ServiceProvider
         $file = $this->app->make(Filesystem::class);
         $path    = realpath(__DIR__.'/../Helpers');
         $helpers = $file->glob($path.'/*.php');
-        foreach ($helpers as $helper) {
+        foreach ($helpers as $helper) 
+        {
             require_once($helper);
         }
     }

@@ -83,7 +83,9 @@
                     下面是html钩子
                 </div>
                 <div class="links">
-                    {{ hst_hook('s_test_html') }}
+                </div>
+                <div class="links">
+                    {{ hst_hook('s_test_html', '0', true) }}
                 </div>
             </div>
         </div>

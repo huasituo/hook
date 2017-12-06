@@ -14,7 +14,7 @@ class ConfigHook
         $data['hook'] = [
             'name' => 'Hook',
             'ename' => 'manageHookIndex',
-            'icon' => '', 
+            'icon' => '',
             'url' => 'manageHookIndex',
             'parent' => 'system',
             'parents' => 'tool',

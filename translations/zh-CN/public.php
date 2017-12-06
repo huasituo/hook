@@ -2,17 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
     'name'=>'名称',
     'module'=>'应用模型',
     'description'=>'描述',
@@ -39,5 +28,4 @@ return [
 
     'no.inject'=>'挂载不存在',
     'hook.inject.noone'=>'挂载已存在',
-
 ];

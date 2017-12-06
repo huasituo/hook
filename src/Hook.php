@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace Huasituo\Hook;
 
 use Huasituo\Hook\Contracts\Repository;

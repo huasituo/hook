@@ -28,9 +28,9 @@
             </div>
 </form>
 <script>
-  Hstui.use('jquery','common',function() {
+Hstui.use('jquery','common',function() {
     Hstui.css('dialog');
-  });
+});
 </script>
 </body>
 </html>

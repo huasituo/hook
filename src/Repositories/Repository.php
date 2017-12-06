@@ -50,7 +50,7 @@ class Repository implements RepositoryContract
 		$this->hooks =& $hook;
 	}
 
-	public function call_hook($which = '', $params = array(), $isreturn = FALSE) 
+	public function call_hook($which = '', $params = null, $isreturn = FALSE) 
 	{
 		if ( ! isset($this->hooks[$which])) {
 			if($isreturn) {
@@ -107,7 +107,7 @@ class Repository implements RepositoryContract
 		if ($class === FALSE AND $function === FALSE) {
 			return false;
 		}
-		$_params		= '';
+		$_params = '';
 		if (isset($data['params']) && !$params) {
 			$_params = $data['params'];
 		}  else  {

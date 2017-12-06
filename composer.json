@@ -1,7 +1,7 @@
 {
     "name": "huasituo/hook",
-    "description": "Huasituo Hook",
-    "keywords": ["cms", "laravel", "Hook", "huasituo"],
+    "description": "Huasituo Laravel Hook",
+    "keywords": ["cms", "laravel", "hook", "huasituo"],
     "license": "MIT",
     "authors": [
         {
@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": ">=5.6.4",
+        "huasituo/hstcms": "*",
     },
     "autoload": {
         "psr-4": {

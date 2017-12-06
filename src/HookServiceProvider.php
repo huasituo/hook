@@ -18,15 +18,11 @@ class HookServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //发布配置文件
         $this->publishes([
             __DIR__.'/../config/hook.php' => config_path('hook.php'),
         ], 'config');
-        //注册包视图
         $this->loadViewsFrom(__DIR__.'/../views', 'hook');
-        //注册数据迁移
         $this->loadMigrationsFrom(__DIR__.'/Database/Migrations');
-        //注册翻译文件
         $this->loadTranslationsFrom(__DIR__.'/../translations', 'hook');
     }
 

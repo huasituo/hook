@@ -3,7 +3,6 @@
 namespace Huasituo\Hook\Http\Controllers\Manage;
 
 use Huasituo\Hstcms\Http\Controllers\Manage\BasicController;
-
 use Huasituo\Hook\Model\HookModel;
 
 use Illuminate\Http\Request;
