@@ -14,23 +14,31 @@
 //后台路由
 Route::group([
     'domain'=> config('hstcms.manage.route.domain'),
-    'prefix' => config('hstcms.manage.route.prefix'),
-    'middleware'=>['web','manage.checkauth', 'manage.request.log']
+    'prefix' => config('hstcms.manage.route.prefix').'/hook',
+    'middleware'=>['web', 'manage.checkauth', 'manage.request.log']
 ], function() {
-    // //菜单
-    // Route::get('/menu/nav', 'Manage\MenuController@nav')->name('manageMenuNav');
-    // Route::get('/menu/nav/add', 'Manage\MenuController@navAdd')->name('manageMenuNavAdd');
-    // Route::post('/menu/nav/add/save', 'Manage\MenuController@navAddSave')->name('manageMenuNavAddSave');
-    // Route::get('/menu/nav/edit/{id}', 'Manage\MenuController@navEdit')->name('manageMenuNavEdit');
-    // Route::post('/menu/nav/edit/save', 'Manage\MenuController@navEditSave')->name('manageMenuNavEditSave');
-    // Route::post('/menu/nav/delete/{id}', 'Manage\MenuController@navDelete')->name('manageMenuNavDelete');
-    //权限点
-    Route::get('/hook/role', 'Manage\MenuController@role')->name('manageMenuRole');
-    Route::get('/hook/role/add', 'Manage\MenuController@roleAdd')->name('manageMenuRoleAdd');
-    Route::post('/hook/role/add/save', 'Manage\MenuController@roleAddSave')->name('manageMenuRoleAddSave');
-    Route::get('/hook/role/edit/{id}', 'Manage\MenuController@roleEdit')->name('manageMenuRoleEdit');
-    Route::post('/hook/role/edit/save', 'Manage\MenuController@roleEditSave')->name('manageMenuRoleEditSave');
-    Route::post('/hook/role/delete/{id}', 'Manage\MenuController@roleDelete')->name('manageMenuRoleDelete');
+    Route::get('/', 'Manage\HookController@index')->name('manageHookIndex');
+    Route::get('/add', 'Manage\HookController@add')->name('manageHookAdd');
+    Route::post('/add/save', 'Manage\HookController@addSave')->name('manageHookAddSave');
+    Route::get('/edit/{name}', 'Manage\HookController@edit')->name('manageHookEdit');
+    Route::post('/edit/save', 'Manage\HookController@editSave')->name('manageHookEditSave');
+    Route::post('/delete/{name}', 'Manage\HookController@delete')->name('manageHookDelete');
+    Route::get('/cache', 'Manage\HookController@cache')->name('manageHookCache');
+
+    Route::get('/inject/{name}', 'Manage\HookInjectController@index')->name('manageHookInjectIndex');
+    Route::get('/inject/{name}/add', 'Manage\HookInjectController@add')->name('manageHookInjectAdd');
+    Route::post('/inject/{name}/add/save', 'Manage\HookInjectController@addSave')->name('manageHookInjectAddSave');
+    Route::get('/inject/{name}/edit/{id}', 'Manage\HookInjectController@edit')->name('manageHookInjectEdit');
+    Route::post('/inject/{name}/edit/save', 'Manage\HookInjectController@editSave')->name('manageHookInjectEditSave');
+    Route::post('/inject/{name}/delete/{id}', 'Manage\HookInjectController@delete')->name('manageHookInjectDelete');
+});
+
+//前台测试
+Route::group([
+    'domain'=> config('hstcms.manage.route.domain') ? env('APP_URL') : '' ,
+    'prefix' => 'hook'
+], function() {
+    Route::get('/test', 'TestController@index')->name('hookTestIndex');
 });
 
 

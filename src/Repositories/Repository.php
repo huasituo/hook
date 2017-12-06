@@ -2,7 +2,10 @@
 
 namespace Huasituo\Hook\Repositories;
 
+use Huasituo\Hook\Model\HookInjectModel;
+
 use Huasituo\Hook\Contracts\Repository as RepositoryContract;
+use Cache;
 
 class Repository implements RepositoryContract
 {
@@ -38,20 +41,12 @@ class Repository implements RepositoryContract
 	 */
 	public function __construct()
 	{
-		$hook = [
-			's_config'=>[
-				[
-					'namespace' => 'vendor/huasituo/hook/src/Hooks',
-					'class' => 'TestHook',
-					'function' => 'test1',
-				],
-				[
-					'namespace' => 'vendor/huasituo/hook/src/Hooks',
-					'class' => 'TestHook',
-					'function' => 'test2',
-				]
-			]
-		];
+	    $cacheName = 'hookInject';
+	    if (!Cache::has(md5($cacheName))) {
+	        $hook = HookInjectModel::setAllCache();
+	    } else {
+	        $hook = Cache::get(md5($cacheName));
+	    }
 		$this->hooks =& $hook;
 	}
 
@@ -100,23 +95,18 @@ class Repository implements RepositoryContract
 		if ($this->_in_progress === TRUE) {
 			return;
 		}
-		if(!isset($data['namespace']) || !$data['namespace']) {
-			$data['namespace'] = 'Huasituo\Hook\Hooks';
+		if(!isset($data['files']) || !$data['files']) {
+			$data['files'] = 'vendor/huasituo/hook/src/Hooks';
 		}
-		if ( !isset($data['namespace']) ) {
+		if ( !isset($data['files']) ) {
 			return false;
 		}
-		$hookClass = self::hook_class($data['namespace'], $data['class']);
-        if (!class_exists($hookClass)) {
-            //return false;
-        }
-        //$this->app->register($hookClass);
+		$hookClass = self::hook_class($data['files'], $data['class']);
 		$class		= empty($data['class']) ? FALSE : $data['class'];
-		$function	= empty($data['function']) ? FALSE : $data['function'];
+		$function	= empty($data['fun']) ? FALSE : $data['fun'];
 		if ($class === FALSE AND $function === FALSE) {
 			return false;
 		}
-        //TestHook::test();
 		$_params		= '';
 		if (isset($data['params']) && !$params) {
 			$_params = $data['params'];
