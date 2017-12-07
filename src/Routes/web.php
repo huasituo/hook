@@ -15,7 +15,7 @@
 Route::group([
     'domain'=> config('hstcms.manage.route.domain'),
     'prefix' => config('hstcms.manage.route.prefix').'/hook',
-    'middleware'=>['web', 'manage.checkauth', 'manage.request.log']
+    'middleware'=>['web', 'manage.auth.check', 'manage.request.log']
 ], function() {
     Route::get('/', 'Manage\HookController@index')->name('manageHookIndex');
     Route::get('/add', 'Manage\HookController@add')->name('manageHookAdd');
