@@ -17,5 +17,15 @@
         "psr-4": {
             "Huasituo\\Hook\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Huasituo\\Hook\\HookServiceProvider"
+            ],
+            "aliases": {
+                "Hooks": "Huasituo\\Hook\\Facades\\Hook"
+            }
+        }
     }
 }
