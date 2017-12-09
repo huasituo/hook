@@ -41,12 +41,7 @@ class Repository implements RepositoryContract
 	 */
 	public function __construct()
 	{
-	    $cacheName = 'hookInject';
-	    if (!Cache::has(md5($cacheName))) {
-	        $hook = HookInjectModel::setAllCache();
-	    } else {
-	        $hook = Cache::get(md5($cacheName));
-	    }
+	    $hook = Cache::get(md5('hookInject'));
 		$this->hooks =& $hook;
 	}
 
@@ -58,7 +53,6 @@ class Repository implements RepositoryContract
 			}
 			return FALSE;
 		}
-
 		if (is_array($this->hooks[$which]) && ! isset($this->hooks[$which]['function'])) {
 			foreach ($this->hooks[$which] as $key=>$val)
 			{
