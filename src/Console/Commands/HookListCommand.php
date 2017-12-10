@@ -78,7 +78,7 @@ class HookListCommand extends Command
             if($hookInject) {
                 foreach ($hookInject as $key => $value) {
                     foreach ($value as $k => $v) {
-                        $info = HookInjectModel::where('hook_name', $v['hook_name'])->where('alias', $v['alias'])->first();
+                        $info = HookInjectModel::where('hook_name', $v['hook_name'])->where('alias', 'mod_'.$v['alias'])->first();
                         if(!$info) {
                             HookInjectModel::addInfo($v['hook_name'], $v['alias'], $v['files'], $v['class'], $v['fun'], $v['description'], 1);
                         } else {

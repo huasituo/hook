@@ -35,6 +35,13 @@ return [
 @return array', 
                 'module'=>'system'
             ],
+            's_common_role_uri'=>[
+                'name'=>'s_common_role_uri', 
+                'description'=>'管理中心权限点', 
+                'document'=>'@param array
+@return array', 
+                'module'=>'system'
+            ],
             's_head'=>[
                 'name'=>'s_head', 
                 'description'=>'头部公共钩子，用于输出JS、css、html等代码在body开始前', 
@@ -94,6 +101,16 @@ return [
                     'files' => 'vendor/huasituo/hook/src/Hooks',
                     'class' => 'ConfigHook',
                     'fun' => 'getManageMenu',
+                    'description'=>'',
+                ]
+            ],
+            's_common_role_uri'=>[
+                [
+                    'hook_name' => 's_common_role_uri',
+                    'alias' => 'manage',
+                    'files' => 'vendor/huasituo/hook/src/Hooks',
+                    'class' => 'ConfigHook',
+                    'fun' => 'getCommonRoleUri',
                     'description'=>'',
                 ]
             ]
