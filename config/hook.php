@@ -42,6 +42,12 @@ return [
 @return array', 
                 'module'=>'system'
             ],
+            's_cache'=>[
+                'name'=>'s_cache', 
+                'description'=>'缓存', 
+                'document'=>'', 
+                'module'=>'system'
+            ],
             's_head'=>[
                 'name'=>'s_head', 
                 'description'=>'头部公共钩子，用于输出JS、css、html等代码在body开始前', 
@@ -62,7 +68,7 @@ return [
                 [
                     'hook_name' => 's_test_arr',
                     'alias' => 'hook1',
-                    'files' => 'vendor/huasituo/hook/src/Hooks',
+                    'files' => 'Huasituo\Hook\Hooks',
                     'class' => 'TestHook',
                     'fun' => 'test1',
                     'description'=>'',
@@ -70,7 +76,7 @@ return [
                 [
                     'hook_name' => 's_test_arr',
                     'alias' => 'hook2',
-                    'files' => 'vendor/huasituo/hook/src/Hooks',
+                    'files' => 'Huasituo\Hook\Hooks',
                     'class' => 'TestHook',
                     'fun' => 'test2',
                     'description'=>'',
@@ -80,7 +86,7 @@ return [
                 [
                     'hook_name' => 's_test_html',
                     'alias' => 'hook1',
-                    'files' => 'vendor/huasituo/hook/src/Hooks',
+                    'files' => 'Huasituo\Hook\Hooks',
                     'class' => 'TestHook',
                     'fun' => 'test3',
                     'description'=>'',
@@ -88,7 +94,7 @@ return [
                 [
                     'hook_name' => 's_test_html',
                     'alias' => 'hook2',
-                    'files' => 'vendor/huasituo/hook/src/Hooks',
+                    'files' => 'Huasituo\Hook\Hooks',
                     'class' => 'TestHook',
                     'fun' => 'test4',
                     'description'=>'',
@@ -98,7 +104,7 @@ return [
                 [
                     'hook_name' => 's_manage_menu',
                     'alias' => 'manage',
-                    'files' => 'vendor/huasituo/hook/src/Hooks',
+                    'files' => 'Huasituo\Hook\Hooks',
                     'class' => 'ConfigHook',
                     'fun' => 'getManageMenu',
                     'description'=>'',
@@ -108,7 +114,7 @@ return [
                 [
                     'hook_name' => 's_common_role_uri',
                     'alias' => 'manage',
-                    'files' => 'vendor/huasituo/hook/src/Hooks',
+                    'files' => 'Huasituo\Hook\Hooks',
                     'class' => 'ConfigHook',
                     'fun' => 'getCommonRoleUri',
                     'description'=>'',

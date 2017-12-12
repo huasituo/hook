@@ -1,5 +1,7 @@
 <?php 
 
+namespace Huasituo\Hook\Hooks;
+
 class ConfigHook
 {
     /**
@@ -8,7 +10,7 @@ class ConfigHook
      * @param array $data 菜单数组
      * @return array
      */
-    function getManageMenu($data)
+    public function getManageMenu($data)
     {
         $data['manageHookIndex'] = [
             'name' => 'Hook',
@@ -29,7 +31,7 @@ class ConfigHook
      * @param array $data 数组
      * @return array
      */
-    function getCommonRoleUri($data)
+    public function getCommonRoleUri($data)
     {
         $data['manageHookIndex'] = [
             'name' => hst_lang('hstcms::public.manage'),

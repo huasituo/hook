@@ -7,6 +7,8 @@ use Huasituo\Hook\Model\HookInjectModel;
 use Huasituo\Hook\Contracts\Repository as RepositoryContract;
 use Cache;
 
+// use Huasituo\Hook\Hooks\ConfigHook;
+
 class Repository implements RepositoryContract
 {
 
@@ -62,7 +64,7 @@ class Repository implements RepositoryContract
 			$this->_run_hook($this->hooks[$which], $which, $params, $isreturn);
 		}
 		if($isreturn) {
-			return isset($this->returns[$which]) ? $this->returns[$which] : '';
+			return isset($this->returns[$which]) ? $this->returns[$which] : $params;
 		}
 		return TRUE;
 	}
@@ -90,12 +92,11 @@ class Repository implements RepositoryContract
 			return;
 		}
 		if(!isset($data['files']) || !$data['files']) {
-			$data['files'] = 'vendor/huasituo/hook/src/Hooks';
+			$data['files'] = 'Huasituo\Hook\Hooks';
 		}
 		if ( !isset($data['files']) ) {
 			return false;
 		}
-		$hookClass = self::hook_class($data['files'], $data['class']);
 		$class		= empty($data['class']) ? FALSE : $data['class'];
 		$function	= empty($data['fun']) ? FALSE : $data['fun'];
 		if ($class === FALSE AND $function === FALSE) {
@@ -107,15 +108,15 @@ class Repository implements RepositoryContract
 		}  else  {
 			$_params = $params;
 		}
-        //echo 44;
 		$this->_in_progress = TRUE;
-
-		if(isset($this->returns[$which]))
-		{
+		if(isset($this->returns[$which])) {
 			$_params = $this->returns[$which];
 		}
 		if ($class !== FALSE) {
-			// The object is stored?
+			$hookClass = self::hook_class($data['files'], $data['class']);
+			if(!class_exists($hookClass)) {
+				return TRUE;
+			}
 			if (isset($this->_objects[$class])) {
 				if (method_exists($this->_objects[$class], $function)) {
 					$hook_return = $this->_objects[$class]->$function($_params);
@@ -123,15 +124,15 @@ class Repository implements RepositoryContract
 					return $this->_in_progress = FALSE;
 				}
 			} else {
-				class_exists($class, FALSE) OR require base_path($hookClass . '.php');
-				if ( ! class_exists($class, FALSE) OR ! method_exists($class, $function)) {
+				if ( ! method_exists($hookClass, $function)) {
 					return $this->_in_progress = FALSE;
 				}
-				$this->_objects[$class] = new $class();
+				$this->_objects[$class] = new $hookClass();
 				$hook_return = $this->_objects[$class]->$function($_params);
 			}
 		} else {
-			class_exists($class, FALSE) OR require base_path($hookClass . '.php');
+			$hookFunction = self::hook_function($data['files']);
+			require base_path($hookFunction);
 			if ( ! function_exists($function)) {
 				return $this->_in_progress = FALSE;
 			}
@@ -150,6 +151,12 @@ class Repository implements RepositoryContract
      */
     protected function hook_class($namespace, $class)
     {
-        return "{$namespace}/{$class}";
+        //return "{$namespace}/{$class}";
+        return "{$namespace}\\{$class}";
+    }
+
+    protected function hook_function($files)
+    {
+        return "{$files}.php";
     }
 }

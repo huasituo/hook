@@ -1,8 +1,9 @@
 <?php 
 
+namespace Huasituo\Hook\Hooks;
+
 class TestHook
 {
-
     public function test1($data = [])
     {
         $data['b'] = '数组钩子1内容，正常';
