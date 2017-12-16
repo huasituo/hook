@@ -91,6 +91,15 @@ class HookCacheCommand extends Command
                     $this->initHookInject($hookInjects);
                 }
             }
+            $vhooks = $this->files->glob($path.'/vendor/huasituo/*/src/Hook/config.php');
+            if($vhooks) {
+                foreach ($vhooks as $hook) {
+                    $hookLists = $this->files->getRequire($hook)['hookList'];
+                    $hookInjects = $this->files->getRequire($hook)['hookInject'];
+                    $this->initHook($hookLists);
+                    $this->initHookInject($hookInjects);
+                }
+            }
         }
 
         $data = HookModel::setCache();
