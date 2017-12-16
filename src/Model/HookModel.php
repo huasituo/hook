@@ -51,6 +51,7 @@ class HookModel extends Model
             foreach ($hooks as $key => $value) {
                 HookInjectModel::del('hook_name', $value['name']);
             }
+            HookInjectModel::del('alias', 'mod_'.$module);
         } else {
             HookModel::where('name', $name)->delete();
             HookInjectModel::del('hook_name', $name);

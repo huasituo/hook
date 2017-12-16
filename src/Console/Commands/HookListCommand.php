@@ -47,7 +47,7 @@ class HookListCommand extends Command
             $Hooks = HookModel::getAll(2);
             $headers = ['name', 'description'];
             $this->table($headers, $Hooks);
-        } else if($t == '2') {
+        } else {
             if (!Cache::has(md5('hookInject'))) {
                 $hookInject = HookInjectModel::setAllCache();
             } else {
@@ -63,31 +63,6 @@ class HookListCommand extends Command
             }
             $headers = ['hookName', 'files', 'class', 'fun'];
             $this->table($headers, $hookInjectAll);
-        } else {
-            $defaultHookList = config('hook.default.hookList');
-            $hookInject = config('hook.default.hookInject');
-            if($defaultHookList) {
-                foreach ($defaultHookList as $key => $value) {
-                    if(!HookModel::where('name', $key)->count()) {
-                        HookModel::addInfo($key, $value['description'], $value['document'], 1, $value['module']);
-                    } else {
-                        HookModel::editInfo($key, $value['description'], $value['document']);
-                    }
-                }
-            }
-            if($hookInject) {
-                foreach ($hookInject as $key => $value) {
-                    foreach ($value as $k => $v) {
-                        $info = HookInjectModel::where('hook_name', $v['hook_name'])->where('alias', 'mod_'.$v['alias'])->first();
-                        if(!$info) {
-                            HookInjectModel::addInfo($v['hook_name'], $v['alias'], $v['files'], $v['class'], $v['fun'], $v['description'], 1);
-                        } else {
-                            HookInjectModel::editInfo($info['id'], $v['hook_name'], $v['alias'], $v['files'], $v['class'], $v['fun'], $v['description']);
-                        }
-                    }
-                }
-            }
-            $this->info('Hook Success');
         }
     }
 }

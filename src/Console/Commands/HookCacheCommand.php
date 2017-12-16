@@ -2,9 +2,12 @@
 
 namespace Huasituo\Hook\Console\Commands;
 
+use Huasituo\Hook\Hook;
 use Huasituo\Hook\Model\HookModel;
 use Huasituo\Hook\Model\HookInjectModel;
 
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Application;
 use Illuminate\Console\Command;
 
 class HookCacheCommand extends Command
@@ -14,7 +17,7 @@ class HookCacheCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hook:cache';
+    protected $signature = 'hook:cache {--p=null}';
     /**
      * The console command description.
      *
@@ -23,13 +26,30 @@ class HookCacheCommand extends Command
     protected $description = 'Hook Cache';
 
     /**
+     * The filesystem instance.
+     *
+     * @var Filesystem
+     */
+    protected $files;
+
+    /**
+     * The Application instance.
+     *
+     * @var Application
+     */
+    protected $app;
+
+    /**
      * Create a new command instance.
      *
      * @param Hstcms $hstcms
      */
-    public function __construct()
+    public function __construct(Hook $hooks, Filesystem $files)
     {
         parent::__construct();
+
+        $this->files = $files;
+        //$this->app = $app;
     }
 
     /**
@@ -39,9 +59,74 @@ class HookCacheCommand extends Command
      */
     public function handle()
     {
+        $p = $this->option('p');
+        if($p !== null && $p !=='all') {
+            $path    = realpath(base_path());
+            $hooks = $this->files->glob($path.'/'.$p.'/Hook/config.php');
+            if($hooks) {
+                $hookLists = $this->files->getRequire($hooks[0])['hookList'];
+                $hookInjects = $this->files->getRequire($hooks[0])['hookInject'];
+                $this->initHook($hookLists);
+                $this->initHookInject($hookInjects);
+            }
+        } else if($p !== null && $p ==='all') {
+            $defaultHookList = config('hook.default.hookList');
+            $defaulHookInject = config('hook.default.hookInject');
+            $this->initHook($defaultHookList);
+            $this->initHookInject($defaulHookInject);
+            $path    = realpath(base_path());
+            $hooks = $this->files->glob($path.'/app/Hook/config.php');
+            if($hooks) {
+                $hookLists = $this->files->getRequire($hooks[0])['hookList'];
+                $hookInjects = $this->files->getRequire($hooks[0])['hookInject'];
+                $this->initHook($hookLists);
+                $this->initHookInject($hookInjects);
+            }
+            $mhooks = $this->files->glob($path.'/app/Modules/*/Hook/config.php');
+            if($mhooks) {
+                foreach ($mhooks as $hook) {
+                    $hookLists = $this->files->getRequire($hook)['hookList'];
+                    $hookInjects = $this->files->getRequire($hook)['hookInject'];
+                    $this->initHook($hookLists);
+                    $this->initHookInject($hookInjects);
+                }
+            }
+        }
+
         $data = HookModel::setCache();
         $injectAll = HookInjectModel::setAllCache();
         $inject = HookInjectModel::setCache();
         $this->info('hook cache ok!');
+    }
+
+    public function initHook($hookLists = []) {
+        if($hookLists) {
+            foreach ($hookLists as $key => $value) {
+                if(!HookModel::where('name', $key)->count()) {
+                    HookModel::addInfo($key, $value['description'], $value['document'], 1, $value['module']);
+                    $this->info('Add Hook: '.$key.'         Success');
+                } else {
+                    HookModel::editInfo($key, $value['description'], $value['document']);
+                    $this->info('Edit Hook: '.$key.'         Success');
+                }
+            }
+        }
+    }
+
+    public function initHookInject($hookInjects = []) {
+        if($hookInjects) {
+            foreach ($hookInjects as $key => $value) {
+                foreach ($value as $k => $v) {
+                    $info = HookInjectModel::where('hook_name', $v['hook_name'])->where('alias', 'mod_'.$v['alias'])->first();
+                    if(!$info) {
+                        HookInjectModel::addInfo($v['hook_name'], $v['alias'], $v['files'], $v['class'], $v['fun'], $v['description'], 1);
+                        $this->info('Add HookInjetct: '.$v['hook_name']. '   '.$v['alias'].'         Success');
+                    } else {
+                        HookInjectModel::editInfo($info['id'], $v['hook_name'], $v['alias'], $v['files'], $v['class'], $v['fun'], $v['description']);
+                        $this->info('Edit HookInjetct: '.$v['hook_name']. '   '.$info['alias'].'         Success');
+                    }
+                }
+            }
+        }
     }
 }
