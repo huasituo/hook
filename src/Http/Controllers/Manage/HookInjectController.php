@@ -38,7 +38,7 @@ class HookInjectController extends BasicController
     public function add($hook_name, Request $request)
     {
         if(!$hook_name) {
-            return $this->showError('hstcms::manage.no.id');
+            return $this->showError('hstcms::public.no.id');
         }
         $hook = HookModel::where('name', $hook_name)->first();
         if(!$hook) {
@@ -79,13 +79,13 @@ class HookInjectController extends BasicController
         HookInjectModel::addInfo(trim($hook_name), trim($request->get('alias')), trim($request->get('files')), trim($request->get('class')), trim($request->get('fun')), trim($request->get('description')));
 
         $this->addOperationLog(hst_lang('hook::public.kook.add.inject').':'.trim($hook_name).trim($request->get('alias')), '', ['hook_name'=>trim($hook_name), 'alias'=>trim($request->get('alias')), 'files'=>trim($request->get('files')), 'description'=>trim($request->get('description')), 'class'=>trim($request->get('class')), 'fun'=>trim($request->get('fun'))], array());
-        return $this->showMessage('hstcms::manage.add.success'); 
+        return $this->showMessage('hstcms::public.add.success'); 
     }
 
     public function edit($hook_name, $id)
     {
         if(!$hook_name || !$id) {
-            return $this->showError('hstcms::manage.no.id');
+            return $this->showError('hstcms::public.no.id');
         }
         $hook = HookModel::where('name', $hook_name)->first();
         if(!$hook) {
@@ -107,7 +107,7 @@ class HookInjectController extends BasicController
     {
         $id = $request->get('id');
         if(!$hook_name || !$id) {
-            return $this->showError('hstcms::manage.no.id');
+            return $this->showError('hstcms::public.no.id');
         }
         $hook = HookModel::where('name', $hook_name)->first();
         if(!$hook) {
@@ -141,13 +141,13 @@ class HookInjectController extends BasicController
 
         HookInjectModel::editInfo($id, trim($hook_name), trim($request->get('alias')), trim($request->get('files')), trim($request->get('class')), trim($request->get('fun')), trim($request->get('description')));
         $this->addOperationLog(hst_lang('hook::public.kook.edit.inject').':'.$hook_name.trim($request->get('alias')), '', ['hook_name'=>trim($hook_name), 'alias'=>trim($request->get('alias')), 'files'=>trim($request->get('files')), 'description'=>trim($request->get('description')), 'class'=>trim($request->get('class')), 'fun'=>trim($request->get('fun'))], $hookInject->toArray());
-        return $this->showMessage('hstcms::manage.edit.success'); 
+        return $this->showMessage('hstcms::public.edit.success'); 
     }
 
     public function delete($hook_name, $id)
     {
         if(!$hook_name || !$id) {
-            return $this->showError('hstcms::manage.no.id');
+            return $this->showError('hstcms::public.no.id');
         }
         $hook = HookModel::where('name', $hook_name)->first();
         if(!$hook) {
@@ -159,7 +159,7 @@ class HookInjectController extends BasicController
         }
         HookInjectModel::del('id', $id);
         $this->addOperationLog(hst_lang('hook::public.kook.delete.inject').':'.$hook_name.$hookInject['alias'], '', array(), $hookInject->toArray());
-        return $this->showMessage('hstcms::manage.delete.success'); 
+        return $this->showMessage('hstcms::public.delete.success'); 
     }
 }
 

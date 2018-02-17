@@ -45,8 +45,8 @@
                 <th >{{ hst_lang('hook::public.files') }}</th>
                 <th >{{ hst_lang('hook::public.class') }}</th>
                 <th >{{ hst_lang('hook::public.fun') }}</th>
-                <th >{{ hst_lang('hstcms::manage.time') }}</th>
-                <th width="10%" >{{ hst_lang('hstcms::manage.operation') }}</th>
+                <th >{{ hst_lang('hstcms::public.times') }}</th>
+                <th width="10%" >{{ hst_lang('hstcms::public.operation') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -61,15 +61,15 @@
                 <td>{!! hst_time2str($v['times']) !!}</td>
                 <td>
                     @if($v['issystem'] == 0)
-                    <a class="btn btn-xs btn-info J_dialog" title="{{ hst_lang('hstcms::manage.update')}}{{ hst_lang('hstcms::manage.data')}}" href="{!! route('manageHookInjectEdit', ['name'=>$v['hook_name'], 'id'=>$v['id']]) !!}">{{ hst_lang('hstcms::manage.update')}}</a>
-                    <a class="btn btn-xs btn-info J_ajax_del" href="{!! route('manageHookInjectDelete', ['name'=>$v['hook_name'], 'id'=>$v['id']]) !!}">{{ hst_lang('hstcms::manage.delete')}}</a>
+                    <a class="btn btn-xs btn-info J_dialog" title="{{ hst_lang('hstcms::public.update')}}{{ hst_lang('hstcms::public.data')}}" href="{!! route('manageHookInjectEdit', ['name'=>$v['hook_name'], 'id'=>$v['id']]) !!}">{{ hst_lang('hstcms::public.update')}}</a>
+                    <a class="btn btn-xs btn-info J_ajax_del" href="{!! route('manageHookInjectDelete', ['name'=>$v['hook_name'], 'id'=>$v['id']]) !!}">{{ hst_lang('hstcms::public.delete')}}</a>
                     @endif
                 </td>
             </tr>
             @endforeach
             @else
             <tr>
-                <td colspan="5">{!! hst_lang('hstcms::manage.no.list') !!}</td>
+                <td colspan="5">{!! hst_lang('hstcms::public.no.list') !!}</td>
             </tr>
             @endif
         </tbody>

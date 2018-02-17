@@ -24,7 +24,7 @@ class CreateHookInjectTable extends Migration
             $table->string('fun', 50)->default('root')->comment(trans('hook::public.fun'));
             $table->text('description', 255)->comment(trans('hook::public.description'));
             $table->tinyInteger('issystem', false)->default(0)->comment(trans('hook::public.issystem'));
-            $table->integer('times')->nullable()->comment(trans('hstcms::manage.times'));
+            $table->integer('times')->nullable()->comment(trans('hstcms::public.times'));
             $table->unique(['hook_name', 'alias']);
         });
     }

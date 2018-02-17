@@ -23,8 +23,8 @@
             </div>
         </div>
             <div class="hstui-pop-bottom">
-                <button class="hstui-button " id="J_dialog_close">{{ hst_lang('hstcms::manage.cancel')}}</button>
-                <button type="submit" class="hstui-button hstui-button-primary J_ajax_submit_btn" data-dialog="1">{{ hst_lang('hstcms::manage.submit')}}</button>
+                <button class="hstui-button " id="J_dialog_close">{{ hst_lang('hstcms::public.cancel')}}</button>
+                <button type="submit" class="hstui-button hstui-button-primary J_ajax_submit_btn" data-dialog="1">{{ hst_lang('hstcms::public.submit')}}</button>
             </div>
 </form>
 <script>

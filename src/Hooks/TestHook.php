@@ -6,13 +6,13 @@ class TestHook
 {
     public function test1($data = [])
     {
-        $data['b'] = '数组钩子1内容，正常';
+        $data['b'] = hst_lang('hook::public.the.array.hook1');
         return $data;
     }
    
     public function test2($data = [])
     {
-        $data['c'] = '数组钩子2内容，正常';
+        $data['c'] = hst_lang('hook::public.the.array.hook2');
         return $data;
     }
 

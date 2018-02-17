@@ -28,4 +28,14 @@ return [
 
     'no.inject'=>'挂载不存在',
     'hook.inject.noone'=>'挂载已存在',
+
+    'the.array.hook'=>'下面是数组钩子',
+    'the.array.hook1'=>'数组钩子1内容，正常',
+    'the.array.hook2'=>'数组钩子2内容，正常',
+
+    'the.html.hook'=>'下面是html钩子',
+
+
+
+
 ];

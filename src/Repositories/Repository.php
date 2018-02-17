@@ -7,8 +7,6 @@ use Huasituo\Hook\Model\HookInjectModel;
 use Huasituo\Hook\Contracts\Repository as RepositoryContract;
 use Cache;
 
-// use Huasituo\Hook\Hooks\ConfigHook;
-
 class Repository implements RepositoryContract
 {
 
@@ -151,7 +149,6 @@ class Repository implements RepositoryContract
      */
     protected function hook_class($namespace, $class)
     {
-        //return "{$namespace}/{$class}";
         return "{$namespace}\\{$class}";
     }
 

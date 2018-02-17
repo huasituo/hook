@@ -28,4 +28,12 @@ return [
 
     'no.inject'=>'The mount does not exist',
     'hook.inject.noone'=>'Mount has already existed',
+
+    'the.array.hook'=>'The following are the array hooks',
+    'the.array.hook1'=>'Array hook one content, normal',
+    'the.array.hook2'=>'Array hook two content, normal',
+    'the.html.hook'=>'Here\'s the HTML hook',
+
+
+
 ];

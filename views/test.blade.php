@@ -70,7 +70,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    下面是数组钩子
+                    {!! hst_lang('hook::public.the.array.hook') !!}
                 </div>
                 <div class="links">
                 <ul style="width: 300px">
@@ -80,7 +80,7 @@
                    <ul>
                 </div>
                 <div class="title m-b-md">
-                    下面是html钩子
+                    {!! hst_lang('hook::public.the.html.hook') !!}
                 </div>
                 <div class="links">
                 </div>
