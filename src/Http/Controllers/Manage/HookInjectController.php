@@ -20,7 +20,7 @@ class HookInjectController extends BasicController
     public function index($hook_name, Request $request)
     {
         $this->navs = [
-            'return'=>['name'=>hst_lang('hstcms::manage.go.back'), 'url'=>route('manageHookIndex')],
+            'return'=>['name'=>hst_lang('hstcms::public.go.back'), 'url'=>route('manageHookIndex')],
             'index'=>['name'=>hst_lang('hook::public.kook.inject'), 'url'=>route('manageHookInjectIndex', ['name'=>$hook_name])],
             'add'=>['name'=>hst_lang('hook::public.kook.add.inject'), 'url'=>route('manageHookInjectAdd', ['name'=>$hook_name]), 'title'=>hst_lang('hook::public.kook.add.inject'), 'class'=>'J_dialog']
         ];

@@ -17,7 +17,7 @@ class HookController extends BasicController
         $this->navs = [
             'index'=>['name'=>hst_lang('hook::public.hook'), 'url'=>'manageHookIndex'],
             'add'=>['name'=>hst_lang('hook::public.hook.add'), 'url'=>'manageHookAdd', 'class'=>'J_dialog', 'title'=>hst_lang('hook::public.hook.add')],
-            'cache'=>['name'=>hst_lang('hstcms::manage.update.cache'), 'url'=>'manageHookCache']
+            'cache'=>['name'=>hst_lang('hstcms::public.update.cache'), 'url'=>'manageHookCache']
         ];
     }
 

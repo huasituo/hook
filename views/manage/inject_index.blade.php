@@ -7,7 +7,7 @@
 <div class="manage-content">
 {!! $navs !!}
 <div class="hstui-frame" style="width: 100%; margin-bottom: 10px">
-    <div class="hstui-frame-title">{{ hst_lang('hstcms::manage.e.info') }}</div>
+    <div class="hstui-frame-title">{{ hst_lang('hstcms::public.e.info') }}</div>
     <div class="hstui-frame-content">
         <table class="hstui-table">
             <thead>
@@ -16,15 +16,15 @@
                 <td>{!! $info['name'] !!}</td>
                 </tr>
                 <tr>
-                    <td>{!! hst_lang('hstcms::manage.module') !!}</td>
+                    <td>{!! hst_lang('hstcms::public.module') !!}</td>
                     <td>{!! $info['module'] !!}</td>
                 </tr>
                 <tr>
-                    <td>{!! hst_lang('hstcms::manage.add', 'hstcms::manage.time') !!}</td>
+                    <td>{!! hst_lang('hstcms::public.add', 'hstcms::public.times') !!}</td>
                     <td>{!! hst_time2str($info['times'], 'Y-m-d H:i:s') !!}</td>
                 </tr>
                 <tr>
-                    <td>{!! hst_lang('hstcms::manage.description') !!}</td>
+                    <td>{!! hst_lang('hstcms::public.description') !!}</td>
                     <td>{!! $info['description'] !!}</td>
                 </tr>
                 <tr>
